@@ -23,7 +23,7 @@ export default new Vuex.Store({
     userLogin (context, payload) {
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/login',
+        url: '/login',
         data: {
           email: payload.email,
           password: payload.password
@@ -40,7 +40,7 @@ export default new Vuex.Store({
     },
     listProduct (context) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: '/products',
         method: 'get',
         headers: {
           token: localStorage.token
@@ -52,7 +52,7 @@ export default new Vuex.Store({
     },
     addProduct (context, payload) {
       return axios({
-        url: 'http://localhost:3000/products',
+        url: '/products',
         method: 'post',
         data: {
           name: payload.name,
@@ -70,7 +70,7 @@ export default new Vuex.Store({
     editProduct (context, payload) {
       return axios({
         method: 'put',
-        url: `http://localhost:3000/products/${payload.id}`,
+        url: `/products/${payload.id}`,
         data: {
           name: payload.name,
           image_url: payload.image_url,
@@ -87,7 +87,7 @@ export default new Vuex.Store({
     deleteProduct (context, payload) {
       return axios({
         method: 'delete',
-        url: `http://localhost:3000/products/${payload.id}`,
+        url: `/products/${payload.id}`,
         headers: {
           token: localStorage.token
         }
