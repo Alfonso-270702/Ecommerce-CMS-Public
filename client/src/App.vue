@@ -51,8 +51,9 @@ export default {
 
 #nav {
   padding: 10px;
-  background: rgb(154,168,251);
-  background: linear-gradient(90deg, rgba(154,168,251,1) 0%, rgba(142,170,250,1) 35%, rgba(127,174,250,1) 100%);
+  /* background: rgb(154,168,251);
+  background: linear-gradient(90deg, rgba(154,168,251,1) 0%, rgba(142,170,250,1) 35%, rgba(127,174,250,1) 100%); */
+  background-color: #adb0b9;
 }
 
 .navbar {
@@ -64,9 +65,10 @@ export default {
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  font-family: 'Roboto', sans-serif;
 }
 
 #nav a.router-link-exact-active {
-  color: #ffffff;
+  color: #006aa7;
 }
 </style>

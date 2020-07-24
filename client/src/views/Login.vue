@@ -76,5 +76,6 @@ export default {
   }
   .login-h1{
     color: white;
+    font-family: 'Roboto', sans-serif;
   }
 </style>

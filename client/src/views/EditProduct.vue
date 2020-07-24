@@ -1,32 +1,50 @@
 <template>
-    <div class="container  my-3" v-if="editedProduct">
-        <form @submit.prevent="editForm">
-            <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">Name</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control w-50" id="name" name="name" v-model="editedProduct.name">
-                </div>
+  <div class="edit" v-if="editedProduct">
+    <div class="edit-container">
+      <form @submit.prevent="editForm">
+        <div class="d-flex justify-content-center">
+          <h1 class="mt-2">Edit Product</h1>
+        </div>
+          <div class="form-group">
+              <div class="d-flex justify-content-center">
+                <label for="name" style="margin-top: 10px">Name:</label>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <input type="text" class="form-control" style="width: 500px" id="name" name="name" v-model="editedProduct.name">
+              </div>
             </div>
-            <div class="form-group row">
-                <label for="image" class="col-sm-2 col-form-label">Image Url</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control w-50" id="image" name="image" v-model="editedProduct.image_url">
-                </div>
+            <div class="form-group">
+              <div class="d-flex justify-content-center">
+                <label for="image" >Image Url:</label>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <input type="text" class="form-control" style="width: 500px" id="image" name="image" v-model="editedProduct.image_url">
+              </div>
             </div>
-             <div class="form-group row">
-                <label for="stock" class="col-sm-2 col-form-label">Stock</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control w-50" id="stock" name="stock" v-model="editedProduct.stock">
-                </div>
+            <div class="form-group">
+              <div class="d-flex justify-content-center">
+              <label for="stock">Stock:</label>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <input type="text" class="form-control" style="width: 500px" id="stock" name="stock" v-model="editedProduct.stock">
+              </div>
             </div>
-            <div class="form-group row">
-                <label for="price" class="col-sm-2 col-form-label">Price</label>
-                <div class="col-sm-10">
-                    <input type="text" class="form-control w-50" id="price" name="price" v-model="editedProduct.price">
-                </div>
+            <div class="form-group">
+              <div class="d-flex justify-content-center">
+                <label for="price">Price:</label>
+              </div>
+              <div class="d-flex justify-content-center">
+                  <input type="text" class="form-control" style="width: 500px" id="price" name="price" v-model="editedProduct.price">
+              </div>
             </div>
-            <button type="submit" class="btn btn-primary">Edit Product</button>
-        </form>
+            <div class="form-group">
+              <div class="d-flex justify-content-center">
+                  <button type="submit" class="btn btn-primary mr-3">Edit Product</button>
+                  <button  @click="homePage" type="submit" class="btn btn-primary mr-3">Cancel</button>
+              </div>
+            </div>
+      </form>
+    </div>
     </div>
 </template>
 
@@ -50,6 +68,9 @@ export default {
         .then(_ => {
           this.$router.push({ name: 'Home' })
         })
+    },
+    homePage () {
+      this.$router.push({ name: 'Home' })
     }
   },
   created () {
@@ -66,5 +87,17 @@ export default {
 </script>
 
 <style>
-
+  .edit{
+    height: 93.6vh;
+    background-color: #eff1f3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url(../assets/wood2.jpg);
+  }
+  .edit-container{
+     background-color: rgba(185, 174, 174, 0.8);
+     padding: 40px;
+     border-radius: 10px;
+  }
 </style>
