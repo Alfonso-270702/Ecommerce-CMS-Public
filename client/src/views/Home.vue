@@ -1,6 +1,8 @@
 <template>
-  <div class="table table-sm d-flex justify-content-center my-5">
-        <table class="table-striped">
+<div class="container" style="width: 1500px;">
+  <h1 class="text-center mt-3">Shoes Collection</h1>
+  <div class="table d-flex justify-content-center my-5">
+        <table class="table-striped shadow" style="width: 100%;">
             <thead>
                 <tr>
                     <th style="min-width: 150px;" scope="col">No</th>
@@ -8,7 +10,7 @@
                     <th style="min-width: 150px;" scope="col">Image</th>
                     <th style="min-width: 150px;" scope="col">Price</th>
                     <th style="min-width: 150px;" scope="col">Stock</th>
-                    <th style="min-width: 150px;" scope="col">Action</th>
+                    <th class="text-center" style="min-width: 150px;" scope="col">Option</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,37 +18,24 @@
             </tbody>
         </table>
   </div>
+</div>
 </template>
 
 <script>
-import axios from 'axios'
 import ProductTable from '../components/ProductTable.vue'
 export default {
   name: 'Home',
-  data () {
-    return {
-      products: []
-    }
-  },
   components: {
     ProductTable
   },
   methods: {
     fecthData () {
-      axios({
-        url: 'http://localhost:3000/products',
-        method: 'get',
-        headers: {
-          token: localStorage.token
-        }
-      })
-        .then(({ data }) => {
-          // console.log(data)
-          this.products = data
-        })
-        .catch(err => {
-          console.log(err.response)
-        })
+      this.$store.dispatch('listProduct')
+    }
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
     }
   },
   created () {
@@ -54,3 +43,6 @@ export default {
   }
 }
 </script>
+
+<style>
+</style>

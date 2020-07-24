@@ -1,29 +1,28 @@
 <template>
-    <div class="container">
-        <form>
+    <div class="container  my-3" v-if="editedProduct">
+        <form @submit.prevent="editForm">
             <div class="form-group row">
-                <label for="name" class="col-sm-2 col-form-label">Name {{this.id}}</label>
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control w-50" id="name" name="name" v-model="name">
-
+                    <input type="text" class="form-control w-50" id="name" name="name" v-model="editedProduct.name">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="image" class="col-sm-2 col-form-label">Image Url</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control w-50" id="image" name="image" v-model="image">
+                    <input type="text" class="form-control w-50" id="image" name="image" v-model="editedProduct.image_url">
                 </div>
             </div>
              <div class="form-group row">
                 <label for="stock" class="col-sm-2 col-form-label">Stock</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control w-50" id="stock" name="stock" v-model="stock">
+                    <input type="text" class="form-control w-50" id="stock" name="stock" v-model="editedProduct.stock">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="price" class="col-sm-2 col-form-label">Price</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control w-50" id="price" name="price" v-model="price">
+                    <input type="text" class="form-control w-50" id="price" name="price" v-model="editedProduct.price">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Edit Product</button>
@@ -32,40 +31,35 @@
 </template>
 
 <script>
-import axios from 'axios'
 export default {
   name: 'EditForm',
-  props: ['product'],
   data () {
     return {
-      name: `${this.product.name}`,
-      image: `${this.product.image_url}`,
-      stock: `${this.product.stock}`,
-      price: `${this.product.price}`,
-      id: `${this.route.params.id}`
+      id: this.$route.params.id
     }
   },
   methods: {
     editForm () {
-      axios({
-        method: 'put',
-        url: `http://localhost:3000/products/${this.id}`,
-        data: {
-          name: this.name,
-          image_url: this.image,
-          stock: this.stock,
-          price: this.price
-        },
-        headers: {
-          token: localStorage.token
-        }
+      this.$store.dispatch('editProduct', {
+        name: this.editedProduct.name,
+        image_url: this.editedProduct.image_url,
+        stock: this.editedProduct.stock,
+        price: this.editedProduct.price,
+        id: this.$route.params.id
       })
-        .then(data => {
-          console.log(data)
+        .then(_ => {
+          this.$router.push({ name: 'Home' })
         })
-        .catch(err => {
-          console.log(err)
-        })
+    }
+  },
+  created () {
+    if (this.$store.state.products.length === 0) {
+      this.$store.dispatch('listProduct')
+    }
+  },
+  computed: {
+    editedProduct () {
+      return this.$store.getters.getEditedData(this.$route.params.id)
     }
   }
 }
