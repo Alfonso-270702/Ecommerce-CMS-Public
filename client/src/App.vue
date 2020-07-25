@@ -9,7 +9,7 @@
           <router-link :to="{name: 'AddProduct'}" class="m-2">Add Product</router-link>
         </div>
         <div class="d-flex align-items-center">
-          <button @click="toLogout" class="btn btn-secondary" >Logout</button>
+          <button @click="toLogout" class="btn btn-warning" >Logout</button>
         </div>
       </div>
     </div>
